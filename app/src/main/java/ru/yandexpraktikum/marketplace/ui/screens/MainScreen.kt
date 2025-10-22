@@ -1,5 +1,6 @@
 package ru.yandexpraktikum.marketplace.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -39,11 +40,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import kotlinx.coroutines.launch
 import ru.yandexpraktikum.marketplace.R
 import ru.yandexpraktikum.marketplace.model.Product
@@ -138,11 +142,22 @@ fun ProductCard(
     onClick: () -> Unit,
     onAddToCart: () -> Unit
 ) {
+    val cardContentDescription = stringResource(R.string.add_to_cart)
+    val actionDescription = stringResource(R.string.added_to_cart, product.name)
     Card(
         modifier = modifier
             .fillMaxWidth()
             .semantics {
-                //
+                contentDescription = "$cardContentDescription ${product.name}"
+                customActions = listOf(
+                    CustomAccessibilityAction(
+                        label = actionDescription,
+                        action = {
+                            onAddToCart()
+                            true
+                        }
+                    )
+                )
             }
     ) {
         Column {
@@ -182,7 +197,6 @@ fun ProductCard(
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
-                val actionDescription = stringResource(R.string.added_to_cart, product.name)
                 Icon(
                     Icons.Default.ShoppingCart,
                     contentDescription = stringResource(R.string.add_to_cart),
