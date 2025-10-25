@@ -2,6 +2,7 @@
     <string name="app_name">Marketplace</string>
     <string name="search_products">Что ищем?</string>
     <string name="add_to_cart">Добавить в корзину</string>
+    <string name="add_to_cart_arg">Добавить в корзину %1$s</string>
     <string name="added_to_cart">%1$s добавлен в корзину</string>
     <string name="price_format">$%1$.2f</string>
     <string name="back">Назад</string>
