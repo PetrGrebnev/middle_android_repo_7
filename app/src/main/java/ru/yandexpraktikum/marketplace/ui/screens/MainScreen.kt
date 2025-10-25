@@ -79,7 +79,6 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            val searchBarDescription = stringResource(R.string.searchbar_description)
             SearchBar(
                 query = searchQuery,
                 onQueryChange = { searchQuery = it },
@@ -93,6 +92,7 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
                     )
                 },
                 placeholder = {
+                    val searchBarDescription = stringResource(R.string.searchbar_description)
                     Text(
                         modifier = Modifier.semantics {
                             contentDescription = searchBarDescription
